@@ -44,7 +44,7 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('gui')),
     )
     gazebo_2 = ExecuteProcess(
-            cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so', world_path],
+            cmd=['gazebo',  '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path],
             output='screen')
    
     
