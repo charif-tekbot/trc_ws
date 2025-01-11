@@ -26,7 +26,7 @@ def generate_launch_description():
     gazebo_launch = PathJoinSubstitution(
         [FindPackageShare("maze_solving"),
         "launch",
-        "gazebo.launch.py"],
+        "empty_world.launch.py"],
     )
 
     gazebo_sim = IncludeLaunchDescription(
