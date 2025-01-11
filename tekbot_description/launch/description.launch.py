@@ -9,18 +9,19 @@ def generate_launch_description():
     
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
-    tebkbot_urdf = PathJoinSubstitution(
+    tekbot_urdf = PathJoinSubstitution(
         [FindPackageShare("tekbot_description"),
         "urdf",
         "tekbot.urdf"]
     )
 
+    
     return LaunchDescription([
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='robot_state_publisher',
-            parameters=[{'robot_description': Command(['xacro ', tebkbot_urdf]), 'use_sim_time': use_sim_time}],
+            parameters=[{'robot_description': Command(['xacro ', tekbot_urdf]), 'use_sim_time': use_sim_time}],
         ),
         
         Node(

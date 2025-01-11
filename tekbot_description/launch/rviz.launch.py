@@ -1,18 +1,16 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import Command
-
 
 def generate_launch_description():
     
     tekbot_description_path = PathJoinSubstitution(
         [FindPackageShare("tekbot_description"),
         "launch",
-        "rviz.launch.py"]
+        "description.launch.py"]
     )
 
     tekbot_description_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource([tekbot_description_path]))
