@@ -27,7 +27,7 @@ ament_package()
 
 install(
   DIRECTORY
-    launch config src include
+    launch config
   DESTINATION
     share/${PROJECT_NAME}
 )
