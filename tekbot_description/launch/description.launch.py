@@ -3,6 +3,7 @@ from launch_ros.actions import Node
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import Command
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
@@ -15,13 +16,16 @@ def generate_launch_description():
         "tekbot.urdf"]
     )
 
+    robot_description = ParameterValue(Command(['xacro ', tekbot_urdf]),
+                                       value_type=str)
+
     
     return LaunchDescription([
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='robot_state_publisher',
-            parameters=[{'robot_description': Command(['xacro ', tekbot_urdf]), 'use_sim_time': use_sim_time}],
+            parameters=[{'robot_description': robot_description, 'use_sim_time': use_sim_time}],
         ),
         
         Node(

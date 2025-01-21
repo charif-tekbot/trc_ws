@@ -10,7 +10,16 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-
+    
+    model_path = PathJoinSubstitution(
+        [FindPackageShare("maze_solving"), "models",
+    )
+    
+    gz_model = SetEnvironmentVariable(
+            name='GAZEBO_MODEL_PATH',
+            value=model_path
+    )
+    
     world_file = PathJoinSubstitution(
         [FindPackageShare("maze_solving"),
         "worlds",
@@ -49,6 +58,7 @@ def generate_launch_description():
     )
 
     ld = LaunchDescription()
+    ld.add_action(gz_model)
     ld.add_action(gazebo_sim)
     ld.add_action(tekbot_description_launch)
     ld.add_action(spawn_entity_cmd)
