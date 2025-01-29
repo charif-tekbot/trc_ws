@@ -12,7 +12,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     
     model_path = PathJoinSubstitution(
-        [FindPackageShare("maze_solving"), "models",]
+        [FindPackageShare("maze_solving"), "models"]
     )
     
     gz_model = SetEnvironmentVariable(
@@ -25,7 +25,16 @@ def generate_launch_description():
         "worlds",
         "maze_3_6x6.world"],
     )
-    
+
+    tekbot_teleop_path = PathJoinSubstitution(
+        [FindPackageShare("tekbot_control"),
+        "launch",
+        "tekbot_teleop_joy.launch.py"]
+    )
+    tekbot_teleop_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource([tekbot_teleop_path]))
+
+
+
     tekbot_description_path = PathJoinSubstitution(
         [FindPackageShare("tekbot_description"),
         "launch",
@@ -57,10 +66,13 @@ def generate_launch_description():
 	output='screen'
     )
 
+
+
     ld = LaunchDescription()
     ld.add_action(gz_model)
     ld.add_action(gazebo_sim)
     ld.add_action(tekbot_description_launch)
     ld.add_action(spawn_entity_cmd)
+    # ld.add_action(tekbot_teleop_launch)
 
     return ld

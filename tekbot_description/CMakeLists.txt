@@ -9,6 +9,20 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+
+  "srv/TimerControl.srv"
+  DEPENDENCIES std_msgs
+
+)
+ament_export_dependencies(rosidl_default_runtime)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -23,6 +37,18 @@ if(BUILD_TESTING)
 endif()
 
 ament_package()
+
+add_executable(timer_control src/timer_control.cpp)
+ament_target_dependencies(timer_control rclcpp geometry_msgs nav_msgs)
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(timer_control ${cpp_typesupport_target})
+
+
+
+install(TARGETS
+  timer_control
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(
   DIRECTORY

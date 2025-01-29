@@ -1,7 +1,6 @@
 import os
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
-from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
@@ -61,6 +60,13 @@ def generate_launch_description():
                     '-Y', spawn_yaw_val],
                     output='screen',
     parameters=[{'use_sim_time': True}])
+  
+  rqt = Node(
+            package='rqt_gui',
+            executable='rqt',
+            name='rqt',
+            output='screen'
+        )
   
   # Create the launch description and populate
   ld = LaunchDescription(ARGUMENTS)
