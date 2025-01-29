@@ -1,0 +1,6 @@
+float64 duration         # Durée en secondes
+float64 linear_speed     # Vitesse linéaire
+float64 angular_speed    # Vitesse angulaire
+---
+bool success             # Indique si la commande a été acceptée
+string message           # Message de retour
