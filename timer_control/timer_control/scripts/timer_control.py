@@ -39,7 +39,7 @@ class TimedCommandPublisher(Node):
 
         self.send_command(duration, linear_speed, angular_speed)
         response.success = True
-        response.message = "Command executed successfully."
+        response.report = "Command executed successfully."
         return response
 
     def send_command(self, duration, linear_speed, angular_speed):
