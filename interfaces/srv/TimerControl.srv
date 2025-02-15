@@ -1,0 +1,6 @@
+float64 linear_vx           # Vitesse linéaire désirée
+float64 angular_wz          # Vitesse angulaire désirée
+float64 duration            # Temps d'exécution de notre commande
+---
+bool success                 # Etat d'exécution de la requête
+string report               # Rapport d'exécution 
