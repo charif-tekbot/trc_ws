@@ -38,6 +38,17 @@ endif()
 
 ament_package()
 
+add_executable(timer_control src/timer_control.cpp)
+ament_target_dependencies(timer_control rclcpp geometry_msgs nav_msgs)
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(timer_control ${cpp_typesupport_target})
+
+
+
+install(TARGETS
+  timer_control
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(
   DIRECTORY
